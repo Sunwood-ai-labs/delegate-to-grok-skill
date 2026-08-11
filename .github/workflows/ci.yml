@@ -8,10 +8,26 @@ permissions:
   contents: read
 
 jobs:
-  verify:
+  verify-skill:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
       - name: Verify package
         shell: pwsh
         run: ./tests/verify.ps1
+
+  verify-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: docs/package-lock.json
+      - name: Install documentation dependencies
+        run: npm ci --prefix docs
+      - name: Build documentation
+        run: npm run docs:build --prefix docs
+      - name: Verify documentation structure
+        run: npm run docs:verify --prefix docs

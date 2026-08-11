@@ -13,9 +13,9 @@
 
 | claim | code refs | validation refs | docs surfaces touched | scope |
 | --- | --- | --- | --- | --- |
-| Headless Grok tasks use a prompt file instead of direct `-p` arguments | `skill/scripts/invoke-grok.ps1`; `skill/SKILL.md` | live wrapper probe returned `READY` for punctuation, quotes, and Japanese | `README.md`, `README.ja.md`, `docs/guides/safe-delegation.md`, `docs/releases/v0.1.0.md` | headless wrapper only |
-| Authentication is isolated and only committed after successful checks | `skill/scripts/invoke-grok.ps1`; `skill/SKILL.md` | wrapper parser; skill validation; code review | `README.md`, `README.ja.md`, `docs/guides/safe-delegation.md` | canonical Grok auth file handling only |
-| Default execution is read-only and constrained to the exact working directory | `skill/scripts/invoke-grok.ps1`; `tests/verify.ps1` | repository verification passed; source-boundary regression passed | `README.md`, `README.ja.md`, `docs/guides/safe-delegation.md`, `docs/releases/v0.1.0.md` | wrapper defaults; `-AllowWrites` is explicit |
+| Headless Grok tasks use a prompt file instead of direct `-p` arguments | `skill/scripts/invoke-grok.ps1`; `skill/SKILL.md` | live wrapper probe returned `READY` for punctuation, quotes, and Japanese | `README.md`, `README.ja.md`, `docs/guide/safe-delegation.md`, `docs/releases/v0.1.0.md` | headless wrapper only |
+| Authentication is isolated and only committed after successful checks | `skill/scripts/invoke-grok.ps1`; `skill/SKILL.md` | wrapper parser; skill validation; code review | `README.md`, `README.ja.md`, `docs/guide/safe-delegation.md` | canonical Grok auth file handling only |
+| Default execution is read-only and constrained to the exact working directory | `skill/scripts/invoke-grok.ps1`; `tests/verify.ps1` | repository verification passed; source-boundary regression passed | `README.md`, `README.ja.md`, `docs/guide/safe-delegation.md`, `docs/releases/v0.1.0.md` | wrapper defaults; `-AllowWrites` is explicit |
 | The public package can be installed and checked without a live account | `README.md`; `README.ja.md`; `tests/verify.ps1`; `.github/workflows/ci.yml` | repository verification passed; skill validation passed | `README.md`, `README.ja.md`, `docs/releases/v0.1.0.md` | offline structural checks only |
 
 ## Steady-State Docs Review
@@ -25,7 +25,7 @@
 | README.md | pass | Added install, usage, default-boundary, and offline verification guidance. |
 | README.ja.md | pass | Synced Japanese install, usage, boundary, and verification guidance. |
 | skill/SKILL.md | pass | Documents mandatory wrapper use, OAuth single-flight recovery, escalation, and failure handling. |
-| docs/guides/safe-delegation.md | pass | Explains the observed failure classes and safe operating model. |
+| docs/guide/safe-delegation.md | pass | Explains the observed failure classes and safe operating model. |
 | docs/releases/v0.1.0.md | pass | Records initial-release highlights, validation, and scope. |
 
 ## QA Inventory
@@ -35,7 +35,7 @@
 | compare_range | pass | `collect-release-context.ps1 -Target main` reported initial-release mode at commit `63aab15c00b8922be679e3dcbf609aa43909a973`. |
 | release_claims_backed | pass | Claim matrix maps each release statement to reviewed code, documentation, and validation evidence. |
 | docs_release_notes | pass | `docs/releases/v0.1.0.md` |
-| companion_walkthrough | pass | `docs/guides/safe-delegation.md` |
+| companion_walkthrough | pass | `docs/guide/safe-delegation.md` |
 | operator_claims_extracted | pass | Claim matrix records prompt transport, auth isolation, directory boundary, and offline-check claims. |
 | impl_sensitive_claims_verified | pass | Parsed wrapper, ran deterministic boundary test, validated skill metadata, and completed a live read-only prompt probe. |
 | steady_state_docs_reviewed | pass | README, Japanese README, SKILL, guide, and release-notes surfaces are listed above. |

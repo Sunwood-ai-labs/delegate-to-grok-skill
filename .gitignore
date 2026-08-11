@@ -9,3 +9,8 @@ auth.json
 
 # Release scratch files
 tmp/*.actual
+
+# VitePress build output and dependencies
+docs/node_modules/
+docs/.vitepress/cache/
+docs/.vitepress/dist/

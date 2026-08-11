@@ -6,6 +6,8 @@ Before opening a pull request, run:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\tests\verify.ps1
+npm --prefix .\docs run docs:build
+npm --prefix .\docs run docs:verify
 ```
 
 For wrapper changes, add a deterministic regression check whenever practical. The test suite must not require a live Grok account.

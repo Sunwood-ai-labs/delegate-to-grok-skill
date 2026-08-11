@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Delegate to Grok safety route</title>
+  <desc id="desc">A blue shield with a routed arrow and two agent nodes.</desc>
+  <rect width="128" height="128" rx="28" fill="#eff6ff"/>
+  <path d="M64 16 104 30v30c0 25-15 43-40 52C39 103 24 85 24 60V30Z" fill="#2563eb"/>
+  <path d="M48 48h20a8 8 0 0 1 8 8v12h12" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
+  <path d="m82 60 10 8-10 8" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
+  <circle cx="44" cy="48" r="7" fill="#93c5fd" stroke="#fff" stroke-width="4"/>
+  <circle cx="76" cy="80" r="7" fill="#93c5fd" stroke="#fff" stroke-width="4"/>
+</svg>
