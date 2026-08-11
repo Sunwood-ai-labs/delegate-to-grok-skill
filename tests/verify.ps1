@@ -105,6 +105,9 @@ echo MOCK_OK
     } catch {
         if ($_.Exception.Message -notmatch 'GROK_INVOKE_FAILED: Grok Build exited with code 17') { throw }
     }
+    # The expected mock failure leaves its native exit code in the caller's
+    # session; clear it so a successful test script exits successfully in pwsh.
+    $global:LASTEXITCODE = 0
 } finally {
     Remove-Item Env:DELEGATE_GROK_TEST_LOG -ErrorAction SilentlyContinue
     Remove-Item Env:DELEGATE_GROK_TEST_MODE -ErrorAction SilentlyContinue
