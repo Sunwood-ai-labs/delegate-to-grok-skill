@@ -15,6 +15,8 @@ param(
     [string[]]$AllowedRoot = @(),
     # Ignore an ambient GROK_HOME. Custom homes must be passed explicitly.
     [string]$GrokHome = (Join-Path $env:USERPROFILE '.grok'),
+    # Test seam for a staged-package mock. Normal callers leave this empty.
+    [string]$GrokExecutable = '',
     [ValidateRange(0, 600)]
     [int]$LockTimeoutSeconds = 30,
     [switch]$AllowSubagents,
@@ -31,8 +33,8 @@ if ($Help) {
 Usage:
   invoke-grok.ps1 -WorkingDirectory <directory> -Prompt <text> [options]
 
-Safe defaults: read-only, working-directory-only, no Grok subagents, no
-cross-session memory, and a 30-second single-run lock. Use -AllowWrites only
+Safe defaults: read-only, working-directory-only, no Grok subagents, no plan
+mode, no cross-session memory, and a 30-second single-run lock. Use -AllowWrites only
 when the user explicitly requested file changes. Use -AllowedRoot only for a
 confirmed broader root. Output formats: plain (or compatibility alias text), json,
 streaming-json.
@@ -49,6 +51,11 @@ function Test-PathWithinRoot {
 }
 
 function Resolve-GrokExecutable {
+    param([string]$RequestedExecutable)
+    if (-not [string]::IsNullOrWhiteSpace($RequestedExecutable)) {
+        if (Test-Path -LiteralPath $RequestedExecutable -PathType Leaf) { return (Resolve-Path -LiteralPath $RequestedExecutable).Path }
+        throw "GROK_NOT_FOUND: explicit Grok executable was not found: $RequestedExecutable"
+    }
     $canonicalExe = Join-Path $env:USERPROFILE '.grok\bin\grok.exe'
     if (Test-Path -LiteralPath $canonicalExe -PathType Leaf) { return (Resolve-Path -LiteralPath $canonicalExe).Path }
     $pathCommand = Get-Command grok -CommandType Application -ErrorAction SilentlyContinue
@@ -56,19 +63,33 @@ function Resolve-GrokExecutable {
     throw 'GROK_NOT_FOUND: grok.exe was not found in the canonical user install location or PATH.'
 }
 
+function Invoke-GrokProcess {
+    param([Parameter(Mandatory = $true)][string]$Executable, [Parameter(Mandatory = $true)][string[]]$Arguments)
+    # stderr from a native process becomes a PowerShell ErrorRecord on Windows
+    # PowerShell 5.1. Keep it private and normalize failures by exit code below.
+    $previousErrorActionPreference = $ErrorActionPreference
+    try {
+        $ErrorActionPreference = 'Continue'
+        $output = @(& $Executable @Arguments 2>&1 | ForEach-Object { $_.ToString() })
+        $exitCode = $LASTEXITCODE
+    } finally {
+        $ErrorActionPreference = $previousErrorActionPreference
+    }
+    return [PSCustomObject]@{ Output = $output; ExitCode = $exitCode }
+}
+
 function Test-GrokAuthentication {
     param([Parameter(Mandatory = $true)][string]$Executable, [Parameter(Mandatory = $true)][string]$Stage)
     # Keep raw CLI diagnostics private: they can contain account details.
-    $result = @(& $Executable models 2>&1)
-    $exitCode = $LASTEXITCODE
-    $resultText = ($result | Out-String)
+    $result = Invoke-GrokProcess -Executable $Executable -Arguments @('models')
+    $resultText = ($result.Output | Out-String)
     if ($resultText -match '(?i)\b(not logged in|not authenticated|authentication required|login required|unauthorized|forbidden)\b') {
         throw "GROK_AUTH_NEEDED: $Stage preflight reports that authentication is required. The wrapper did not start login. Follow the skill OAuth single-flight procedure, then retry once."
     }
     $hasLoginConfirmation = $resultText -match '(?im)^\s*You are logged in\b'
     $hasModelList = $resultText -match '(?im)^\s*Available models:'
-    if ($exitCode -ne 0 -or -not $hasLoginConfirmation -or -not $hasModelList) {
-        throw "GROK_AUTH_UNKNOWN: $Stage preflight could not positively verify the Grok session. Exit code: $exitCode. Stop instead of retrying or starting another login."
+    if ($result.ExitCode -ne 0 -or -not $hasLoginConfirmation -or -not $hasModelList) {
+        throw "GROK_AUTH_UNKNOWN: $Stage preflight could not positively verify the Grok session. Exit code: $($result.ExitCode). Stop instead of retrying or starting another login."
     }
 }
 
@@ -83,8 +104,9 @@ $resolvedAllowedRoots = @(
 )
 if (-not ($resolvedAllowedRoots | Where-Object { Test-PathWithinRoot -Candidate $resolvedDirectory -Root $_ })) { throw "GROK_CWD_DENIED: $resolvedDirectory is outside the allowed root set. Pass the exact approved root with -AllowedRoot." }
 
-$grokExe = Resolve-GrokExecutable
-$canonicalGrokHome = (Resolve-Path -LiteralPath $GrokHome -ErrorAction Stop).Path
+$grokExe = Resolve-GrokExecutable -RequestedExecutable $GrokExecutable
+if (-not (Test-Path -LiteralPath $GrokHome -PathType Container)) { throw "GROK_AUTH_MISSING: Grok home does not exist: $GrokHome" }
+$canonicalGrokHome = (Resolve-Path -LiteralPath $GrokHome).Path
 $canonicalAuthPath = Join-Path $canonicalGrokHome 'auth.json'
 $effectiveOutputFormat = if ($OutputFormat -eq 'text') { 'plain' } else { $OutputFormat }
 $runMutex = [System.Threading.Mutex]::new($false, 'Local\CodexDelegateToGrokRun')
@@ -123,13 +145,13 @@ This is a read-only task. Do not create, edit, rename, or delete files. Do not i
     }
     $promptPath = Join-Path $tempGrokHome 'prompt.txt'
     [System.IO.File]::WriteAllText($promptPath, "$guard`n`n$Prompt", [System.Text.UTF8Encoding]::new($false))
-    $arguments = @('--cwd', $resolvedDirectory, '--max-turns', [string]$MaxTurns, '--reasoning-effort', $ReasoningEffort, '--output-format', $effectiveOutputFormat, '--permission-mode', $(if ($AllowWrites) { 'auto' } else { 'default' }), '--prompt-file', $promptPath)
+    $arguments = @('--cwd', $resolvedDirectory, '--max-turns', [string]$MaxTurns, '--reasoning-effort', $ReasoningEffort, '--output-format', $effectiveOutputFormat, '--permission-mode', $(if ($AllowWrites) { 'auto' } else { 'default' }), '--prompt-file', $promptPath, '--no-plan')
     if (-not $AllowWrites) { $arguments += @('--sandbox', 'read-only') }
     if (-not $AllowSubagents) { $arguments += '--no-subagents' }
     if (-not $AllowMemory) { $arguments += '--no-memory' }
-    & $grokExe @arguments
-    $exitCode = $LASTEXITCODE
-    if ($exitCode -ne 0) { throw "GROK_INVOKE_FAILED: Grok Build exited with code $exitCode. Canonical authentication was not changed." }
+    $taskResult = Invoke-GrokProcess -Executable $grokExe -Arguments $arguments
+    if ($taskResult.ExitCode -ne 0) { throw "GROK_INVOKE_FAILED: Grok Build exited with code $($taskResult.ExitCode). Canonical authentication was not changed." }
+    $taskResult.Output | Write-Output
     if (-not (Test-Path -LiteralPath $tempAuthPath -PathType Leaf)) { throw 'GROK_AUTH_LOST: isolated auth.json disappeared; canonical authentication was preserved.' }
     Test-GrokAuthentication -Executable $grokExe -Stage 'post-invocation'
     Copy-Item -LiteralPath $tempAuthPath -Destination $canonicalAuthPath -Force

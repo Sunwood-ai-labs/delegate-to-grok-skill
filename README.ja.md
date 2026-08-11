@@ -27,7 +27,8 @@
 
 ```powershell
 git clone https://github.com/Sunwood-ai-labs/delegate-to-grok-skill.git
-Copy-Item -Recurse -Force .\delegate-to-grok-skill\skill "$env:USERPROFILE\.codex\skills\delegate-to-grok"
+& .\delegate-to-grok-skill\scripts\sync-skill.ps1
+& .\delegate-to-grok-skill\scripts\sync-skill.ps1 -VerifyOnly
 ```
 
 Codex を再起動または更新してスキルを検出させます。

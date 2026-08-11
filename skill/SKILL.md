@@ -13,7 +13,7 @@ Use local **grok** as a secondary coding and research agent. Codex owns scope, s
 2. Name `-WorkingDirectory`. The default approved root is exactly that directory; use `-AllowedRoot` only for an explicitly confirmed parent root.
 3. The wrapper runs a fresh `grok models` preflight before the task and after it. It fails closed unless both explicitly show a logged-in session and a model list.
 4. The wrapper is single-flight: wait up to 30 seconds; treat `GROK_BUSY` as ownership by an existing run. Never start a second Grok or OAuth process.
-5. Read-only is the default: `--permission-mode default`, `--sandbox read-only`, `--no-subagents`, and `--no-memory`. `-AllowWrites`, `-AllowSubagents`, and `-AllowMemory` each require a specific user request.
+5. Read-only is the default: `--permission-mode default`, `--sandbox read-only`, `--no-subagents`, `--no-plan`, and `--no-memory`. `-AllowWrites`, `-AllowSubagents`, and `-AllowMemory` each require a specific user request.
 6. Do not use `--always-approve`, `bypassPermissions`, `dontAsk`, persistent debug logs, or a command that exposes prompts or auth files. Prompts always use a temporary `--prompt-file`.
 7. Never read or expose `%USERPROFILE%\.grok\auth.json`. The wrapper copies it only to an isolated temporary home and commits it back only after the run and postflight succeed.
 8. Put all task text in one `-Prompt` value. This safely supports punctuation, quotes, commas, multiline text, and Japanese.
@@ -52,7 +52,7 @@ Nested target under a confirmed parent root:
       -AllowedRoot 'E:\ApprovedProject' `
       -Prompt 'Review the current test failures without changing files.'
 
-Use `-Help` for the safe invocation summary. `-OutputFormat text` remains a compatibility alias for `plain`; prefer `plain`, `json`, or `streaming-json`.
+Use `-Help` for the safe invocation summary. `-OutputFormat text` remains a compatibility alias for `plain`; prefer `plain`, `json`, or `streaming-json`. A Grok nonzero exit is reported as `GROK_INVOKE_FAILED`; do not retry it with a direct CLI command.
 
 ## Verification and failure handling
 

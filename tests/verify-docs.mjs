@@ -70,6 +70,12 @@ for (const relativePath of ['README.md', 'README.ja.md']) {
   }
 }
 
+for (const relativePath of ['README.md', 'README.ja.md', 'docs/guide/getting-started.md', 'docs/ja/guide/getting-started.md']) {
+  const content = readFileSync(resolve(repoRoot, relativePath), 'utf8')
+  if (content.includes('Copy-Item -Recurse -Force')) throw new Error(`${relativePath} retains the unverified copy-only installation command.`)
+  if (!content.includes('scripts\\sync-skill.ps1')) throw new Error(`${relativePath} is missing the verified skill synchronization command.`)
+}
+
 for (const relativePath of brandSurfaces) {
   const content = readFileSync(resolve(repoRoot, relativePath), 'utf8')
   for (const forbidden of ['Defensive', 'What it protects', '保護すること', 'Safety first', '安全を最優先', 'protective shield', 'shield and route', 'シールド', 'header-v1.png']) {

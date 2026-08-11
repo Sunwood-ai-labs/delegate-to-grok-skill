@@ -19,7 +19,8 @@ If `grok models` explicitly reports that authentication is required, complete on
 
 ```powershell
 git clone https://github.com/Sunwood-ai-labs/delegate-to-grok-skill.git
-Copy-Item -Recurse -Force .\delegate-to-grok-skill\skill "$env:USERPROFILE\.codex\skills\delegate-to-grok"
+& .\delegate-to-grok-skill\scripts\sync-skill.ps1
+& .\delegate-to-grok-skill\scripts\sync-skill.ps1 -VerifyOnly
 ```
 
 Restart or refresh Codex so it discovers the new local skill.

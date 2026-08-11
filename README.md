@@ -27,7 +27,8 @@ Prerequisites: Windows PowerShell 5.1+ or PowerShell 7+, Codex, and a locally in
 
 ```powershell
 git clone https://github.com/Sunwood-ai-labs/delegate-to-grok-skill.git
-Copy-Item -Recurse -Force .\delegate-to-grok-skill\skill "$env:USERPROFILE\.codex\skills\delegate-to-grok"
+& .\delegate-to-grok-skill\scripts\sync-skill.ps1
+& .\delegate-to-grok-skill\scripts\sync-skill.ps1 -VerifyOnly
 ```
 
 Restart or refresh Codex so it discovers the skill.
