@@ -17,8 +17,8 @@ A defensive Codex skill for delegating read-only research, repository inspection
 Prerequisites: Windows PowerShell 5.1+ or PowerShell 7+, Codex, and a locally installed `grok` command. Authenticate separately with `grok login --oauth` when `grok models` explicitly reports that authentication is needed.
 
 ```powershell
-git clone https://github.com/Sunwood-ai-labs/delegate-to-grok.git
-Copy-Item -Recurse -Force .\delegate-to-grok\skill "$env:USERPROFILE\.codex\skills\delegate-to-grok"
+git clone https://github.com/Sunwood-ai-labs/delegate-to-grok-skill.git
+Copy-Item -Recurse -Force .\delegate-to-grok-skill\skill "$env:USERPROFILE\.codex\skills\delegate-to-grok"
 ```
 
 Restart or refresh Codex so it discovers the skill.

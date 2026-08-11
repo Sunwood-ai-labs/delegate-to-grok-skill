@@ -2,12 +2,12 @@
 
 ## Release Context
 
-- repository: `Sunwood-ai-labs/delegate-to-grok`
+- repository: `Sunwood-ai-labs/delegate-to-grok-skill` (renamed after the initial release)
 - release tag: `v0.1.0`
 - compare range: `<none>; initial release mode` at `63aab15c00b8922be679e3dcbf609aa43909a973`
 - requested outputs: public GitHub repository, initial GitHub release, installable Codex skill package
 - validation commands run: `powershell -NoProfile -ExecutionPolicy Bypass -File .\tests\verify.ps1`; `python C:\Users\makim\.codex\skills\.system\skill-creator\scripts\quick_validate.py .\skill`; live read-only wrapper probe with punctuation, quotes, and Japanese text
-- release URLs: `https://github.com/Sunwood-ai-labs/delegate-to-grok/releases/tag/v0.1.0`; published `2026-08-11T04:19:53Z`
+- release URLs: `https://github.com/Sunwood-ai-labs/delegate-to-grok-skill/releases/tag/v0.1.0`; published `2026-08-11T04:19:53Z`
 
 ## Claim Matrix
 

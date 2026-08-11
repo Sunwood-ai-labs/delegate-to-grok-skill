@@ -17,8 +17,8 @@ Windows 上のローカル Grok Build CLI へ、Codex から安全に調査・�
 前提条件は Windows PowerShell 5.1+ または PowerShell 7+、Codex、ローカルに導入済みの `grok` コマンドです。`grok models` が明示的に認証要求を返した場合だけ、別途 `grok login --oauth` を行ってください。
 
 ```powershell
-git clone https://github.com/Sunwood-ai-labs/delegate-to-grok.git
-Copy-Item -Recurse -Force .\delegate-to-grok\skill "$env:USERPROFILE\.codex\skills\delegate-to-grok"
+git clone https://github.com/Sunwood-ai-labs/delegate-to-grok-skill.git
+Copy-Item -Recurse -Force .\delegate-to-grok-skill\skill "$env:USERPROFILE\.codex\skills\delegate-to-grok"
 ```
 
 Codex を再起動または更新してスキルを検出させます。
