@@ -7,7 +7,7 @@
 - compare range: `<none>; initial release mode` at `63aab15c00b8922be679e3dcbf609aa43909a973`
 - requested outputs: public GitHub repository, initial GitHub release, installable Codex skill package
 - validation commands run: `powershell -NoProfile -ExecutionPolicy Bypass -File .\tests\verify.ps1`; `python C:\Users\makim\.codex\skills\.system\skill-creator\scripts\quick_validate.py .\skill`; live read-only wrapper probe with punctuation, quotes, and Japanese text
-- release URLs: pending publication
+- release URLs: `https://github.com/Sunwood-ai-labs/delegate-to-grok/releases/tag/v0.1.0`; published `2026-08-11T04:19:53Z`
 
 ## Claim Matrix
 
@@ -44,10 +44,10 @@
 | svg_assets_validated | not_applicable | Repository ships no SVG branding or release-header assets. |
 | docs_assets_committed_before_tag | pass | Documentation and CI are in initial commit `63aab15c00b8922be679e3dcbf609aa43909a973`; this inventory will be committed before tagging. |
 | docs_deployed_live | not_applicable | The repository has Markdown documentation but no separate docs deployment; GitHub renders committed Markdown. |
-| tag_local_remote | not_applicable | Pre-publication QA pass; local and remote tag verification occurs immediately after this inventory is pushed. |
-| github_release_verified | not_applicable | Pre-publication QA pass; release-body verification occurs immediately after the tag and release are published. |
+| tag_local_remote | pass | Annotated tag `v0.1.0` was pushed to `origin`; `git ls-remote --tags origin v0.1.0` resolves it. |
+| github_release_verified | pass | `gh release view v0.1.0 --json url,body,publishedAt,isDraft,tagName,targetCommitish` returned the published non-draft release and verified body. |
 | validation_commands_recorded | pass | Release Context records all structural and live-read-only validation commands. |
-| publish_date_verified | not_applicable | The date is intentionally omitted until GitHub records the published release timestamp. |
+| publish_date_verified | pass | GitHub reported `publishedAt` as `2026-08-11T04:19:53Z`; the release body intentionally contains no hardcoded date. |
 
 ## Notes
 
