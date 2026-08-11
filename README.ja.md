@@ -1,13 +1,13 @@
 <p align="center">
-  <img src="docs/public/icon.svg" width="112" alt="delegate-to-grok のシールドとルートを表すアイコン">
+  <img src="docs/public/icon.svg" width="112" alt="delegate-to-grok の委譲レーンを表すアイコン">
 </p>
 
 <h1 align="center">delegate-to-grok</h1>
 
-<p align="center">Windows 上の Grok Build へ、Codex から安全に調査と明示許可済みの実装を委譲する防御的なスキルです。</p>
+<p align="center">Windows 上で、Codex から Grok Build へ調査・レビュー・比較・実装補助を委譲するスキルです。</p>
 
 <p align="center">
-  <img src="docs/public/header-v1.png" alt="委譲する二つのエージェントを結ぶ青い保護シールド" width="100%">
+  <img src="docs/public/header-v2.png" alt="Codexの中央制御から委譲タスクを分配し、Grokの結果を集約するワークフロー図" width="100%">
 </p>
 
 <p align="center">
@@ -18,13 +18,16 @@
 
 <p align="center"><a href="README.md">English</a> · <a href="https://sunwood-ai-labs.github.io/delegate-to-grok-skill/ja/">ドキュメント</a> · <a href="SECURITY.md">セキュリティ</a> · <a href="CONTRIBUTING.md">コントリビュート</a></p>
 
-## 🛡️ 保護すること
+## 🧩 できること
 
-- すべてのヘッドレス実行をラッパー経由に固定し、壊れやすい `grok -p` への直接フォールバックを禁止します。
-- プロンプトを一時ファイルで渡すため、引用符・カンマ・複数行・日本語を安全に扱えます。
-- 実行前後で認証を検査し、認証状態は隔離された一時領域で扱います。
-- 名前付きミューテックスで実行を直列化し、OAuth とセッションの競合を防ぎます。
-- 既定は読み取り専用、Grok 内サブエージェント無効、メモリ無効、指定ディレクトリだけを許可する境界です。
+- リポジトリ調査、コードレビュー、比較、公開 X 調査、実装補助を Grok Build へ委譲します。
+- タスクのスコープ、証拠確認、テスト方針、最終判断は Codex が担います。
+- 変更や結論を統合する前に、Grok の所見を第二の視点として持ち帰れます。
+- Codex 側で独立した複数トラックを協調できます。このラッパー自体は Grok CLI 呼び出しを意図的に単一実行に保ちます。
+
+## ⚙️ 実行契約
+
+ラッパーは予測可能な実行契約を提供します。プロンプトは一時ファイルで渡し、権限とワークスペース境界を明示し、タスク前後で認証とセッションを確認します。既定は読み取り専用で、`-AllowWrites` はユーザーが明示的に許可した場合だけの昇格です。
 
 ## 🚀 インストール
 
@@ -37,7 +40,7 @@ Copy-Item -Recurse -Force .\delegate-to-grok-skill\skill "$env:USERPROFILE\.code
 
 Codex を再起動または更新してスキルを検出させます。
 
-## 🧭 使い方
+## 🧭 タスクを委譲する
 
 ```powershell
 & "$env:USERPROFILE\.codex\skills\delegate-to-grok\scripts\invoke-grok.ps1" `
@@ -51,9 +54,13 @@ Codex を再起動または更新してスキルを検出させます。
 & "$env:USERPROFILE\.codex\skills\delegate-to-grok\scripts\invoke-grok.ps1" -Help
 ```
 
+## 🧭 複数トラックを協調する
+
+Grok は Codex が管理する作業トラックの一つとして使います。レビューや比較を委譲し、証拠を持ち帰り、Codex が他のエージェントや一次情報と照合して統合します。ラッパーは Grok 内部の並列実行を提供するものではなく、Grok CLI 呼び出しを意図的に直列化します。
+
 ## 📚 ドキュメント
 
-セットアップ、安全な委譲、トラブルシューティング、リリースノートは [英日ドキュメントサイト](https://sunwood-ai-labs.github.io/delegate-to-grok-skill/ja/) を参照してください。
+セットアップ、実行契約、トラブルシューティング、リリースノートは [英日ドキュメントサイト](https://sunwood-ai-labs.github.io/delegate-to-grok-skill/ja/) を参照してください。
 
 ## 🧪 開発
 

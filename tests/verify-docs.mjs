@@ -8,7 +8,7 @@ const requiredFiles = [
   '.vitepress/theme/index.ts',
   '.vitepress/theme/style.css',
   'public/icon.svg',
-  'public/header-v1.png',
+  'public/header-v2.png',
   'index.md',
   'guide/getting-started.md',
   'guide/safe-delegation.md',
@@ -37,14 +37,40 @@ for (const expected of ["base: '/delegate-to-grok-skill/'", "logo: '/icon.svg'",
 }
 
 const icon = readFileSync(resolve(docsRoot, 'public/icon.svg'), 'utf8')
-if (!icon.includes('<svg') || !icon.includes('Delegate to Grok safety route')) {
+if (!icon.includes('<svg') || !icon.includes('Delegate to Grok orchestration lanes')) {
   throw new Error('The shared icon SVG is incomplete.')
 }
 
+const brandSurfaces = [
+  'README.md',
+  'README.ja.md',
+  'docs/index.md',
+  'docs/ja/index.md',
+  'docs/.vitepress/config.mts'
+]
+
 for (const relativePath of ['README.md', 'README.ja.md']) {
   const readme = readFileSync(resolve(repoRoot, relativePath), 'utf8')
-  for (const expected of ['docs/public/icon.svg', 'docs/public/header-v1.png', 'sunwood-ai-labs.github.io/delegate-to-grok-skill']) {
+  for (const expected of ['docs/public/icon.svg', 'docs/public/header-v2.png', 'sunwood-ai-labs.github.io/delegate-to-grok-skill']) {
     if (!readme.includes(expected)) throw new Error(`${relativePath} is missing ${expected}`)
+  }
+}
+
+for (const relativePath of brandSurfaces) {
+  const content = readFileSync(resolve(repoRoot, relativePath), 'utf8')
+  for (const forbidden of ['Defensive', 'What it protects', '保護すること', 'Safety first', '安全を最優先', 'protective shield', 'shield and route', 'シールド', 'header-v1.png']) {
+    if (content.includes(forbidden)) throw new Error(`${relativePath} retains defense-first brand text: ${forbidden}`)
+  }
+}
+
+for (const [relativePath, required] of [
+  ['README.md', 'Grok Build research, review, comparison, and implementation support'],
+  ['README.ja.md', '調査・レビュー・比較・実装補助'],
+  ['docs/index.md', 'Codex-to-Grok delegation for real work'],
+  ['docs/ja/index.md', 'Codex から Grok Build へ仕事を委譲']
+]) {
+  if (!readFileSync(resolve(repoRoot, relativePath), 'utf8').includes(required)) {
+    throw new Error(`${relativePath} is missing its delegation-first identity statement.`)
   }
 }
 

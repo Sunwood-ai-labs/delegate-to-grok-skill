@@ -12,7 +12,7 @@
 | Public repository metadata | Add concise description, topics, and a Pages homepage URL. | `gh repo view` and `gh api` after update. |
 | README.md | Add a coherent hero, icon, badges, documentation links, clearer installation, security, and contributor paths. | Markdown link/path checks, heading review, and rendered-link inspection. |
 | README.ja.md | Keep the Japanese README structurally parallel with the English README. | Heading/order parity and path checks. |
-| Visual identity | Add one original, flat SVG shield-and-route icon for README and VitePress favicon/logo. | SVG markup inspection and reference checks. |
+| Visual identity | Add one original, flat SVG routing-and-merge icon for README and VitePress favicon/logo. | SVG markup inspection and reference checks. |
 | Bilingual docs | Add VitePress home, getting-started, safe-delegation, troubleshooting, and release pages in English and Japanese. | `npm run docs:build`, config/nav/sidebar and page-path checks. |
 | CI and Pages | Add docs build validation and deploy GitHub Pages from `main`. | Workflow inspection, Actions runs, and live Pages URL. |
 | Release evidence | Keep current QA references valid after docs-path migration. | Release-QA validator and link/path checks. |
@@ -40,7 +40,7 @@
 - structural QA: pass — README heading parity, renamed-slug search, docs paths, icon references, and workflow targets were checked.
 - docs build QA: pass — `npm run docs:build --prefix docs` and `npm run docs:verify --prefix docs` completed successfully.
 - SVG QA: pass — `svg-header-layout-lint` reported no issues for `docs/public/icon.svg`.
-- Header image QA: pass — built-in `image_gen` produced the text-free `docs/public/header-v1.png`; visual inspection confirmed the requested left-side copy space, shield-and-route motif, and absence of third-party branding.
+- Header image QA: superseded — `header-v1.png` was removed during the delegation-first rebrand and replaced by the text-free `docs/public/header-v2.png`, which visual inspection confirmed as a central distribution-and-merge workflow without third-party branding.
 - dependency audit: reviewed — `npm audit` reports three known VitePress 1.6.4 development-server dependency advisories with no stable fix available from npm; production Pages deploys static build output and the local dev server remains loopback-only by default.
 - Pages deployment QA: pass — `Deploy documentation` run `31458965143` completed successfully after Pages was enabled as workflow-backed; English home, Japanese home, and getting-started page each returned HTTP 200 at `https://sunwood-ai-labs.github.io/delegate-to-grok-skill/`.
 - metadata QA: pass — GitHub description, homepage, and eight public topics were set and read back through `gh repo view`.

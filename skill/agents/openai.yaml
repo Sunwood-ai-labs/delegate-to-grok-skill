@@ -1,4 +1,4 @@
 interface:
   display_name: "Delegate to Grok Build"
-  short_description: "Safe Grok Build delegation and public X research"
-  default_prompt: "Use $delegate-to-grok to perform a read-only Grok Build investigation with direct sources."
+  short_description: "Grok Build task delegation and public X research"
+  default_prompt: "Use $delegate-to-grok to delegate a read-only Grok Build investigation with direct sources."

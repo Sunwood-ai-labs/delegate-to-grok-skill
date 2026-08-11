@@ -1,13 +1,13 @@
 <p align="center">
-  <img src="docs/public/icon.svg" width="112" alt="delegate-to-grok shield and route icon">
+  <img src="docs/public/icon.svg" width="112" alt="delegate-to-grok orchestration lanes icon">
 </p>
 
 <h1 align="center">delegate-to-grok</h1>
 
-<p align="center">A defensive Codex skill for delegating research and explicitly authorized implementation work to Grok Build on Windows.</p>
+<p align="center">A Codex delegation lane for Grok Build research, review, comparison, and implementation support on Windows.</p>
 
 <p align="center">
-  <img src="docs/public/header-v1.png" alt="A blue protective shield connecting two delegated agent nodes" width="100%">
+  <img src="docs/public/header-v2.png" alt="Central orchestrator splitting delegation task streams from Codex and merging Grok findings" width="100%">
 </p>
 
 <p align="center">
@@ -18,13 +18,16 @@
 
 <p align="center"><a href="README.ja.md">日本語</a> · <a href="https://sunwood-ai-labs.github.io/delegate-to-grok-skill/">Documentation</a> · <a href="SECURITY.md">Security</a> · <a href="CONTRIBUTING.md">Contributing</a></p>
 
-## 🛡️ What it protects
+## 🧩 What it enables
 
-- Uses a wrapper for every headless run—no fragile direct `grok -p` fallback.
-- Sends prompts through a temporary file, preserving quotes, commas, multiline content, and Japanese text.
-- Performs fresh authentication preflight and postflight checks, with isolated temporary authentication state.
-- Serializes invocations with a named mutex to prevent OAuth/session races.
-- Defaults to read-only Grok permissions, no Grok subagents, no memory, and an exact-directory filesystem boundary.
+- Delegate repository investigation, code review, comparisons, public X research, and implementation-support tasks to Grok Build.
+- Keep Codex in charge of the task scope, evidence review, test strategy, and final decision.
+- Bring Grok findings back as a second perspective before you integrate a change or report a conclusion.
+- Coordinate multiple independently scoped tracks at the Codex workflow level. This wrapper deliberately keeps each Grok CLI invocation single-flight.
+
+## ⚙️ Execution contract
+
+The wrapper supplies a predictable execution contract: prompts use a temporary file, permissions and workspace boundaries are explicit, and authentication/session checks are verified around the task. Read-only is the default; `-AllowWrites` is an explicit user-authorized escalation.
 
 ## 🚀 Install
 
@@ -37,7 +40,7 @@ Copy-Item -Recurse -Force .\delegate-to-grok-skill\skill "$env:USERPROFILE\.code
 
 Restart or refresh Codex so it discovers the skill.
 
-## 🧭 Use
+## 🧭 Delegate a task
 
 ```powershell
 & "$env:USERPROFILE\.codex\skills\delegate-to-grok\scripts\invoke-grok.ps1" `
@@ -51,9 +54,13 @@ The working directory itself is the default allowed root. Specify `-AllowedRoot`
 & "$env:USERPROFILE\.codex\skills\delegate-to-grok\scripts\invoke-grok.ps1" -Help
 ```
 
+## 🧭 Coordinate multiple tracks
+
+Use Grok as one focused lane among Codex-managed workstreams: delegate a review or comparison, collect its evidence, and have Codex reconcile the result with other agents or primary sources. Do not present the wrapper as enabling Grok-internal parallelism: it intentionally serializes Grok CLI runs.
+
 ## 📚 Documentation
 
-Browse the [English and Japanese documentation site](https://sunwood-ai-labs.github.io/delegate-to-grok-skill/) for setup, safe delegation, troubleshooting, and release notes.
+Browse the [English and Japanese documentation site](https://sunwood-ai-labs.github.io/delegate-to-grok-skill/) for setup, delegation rules, troubleshooting, and release notes.
 
 ## 🧪 Development
 

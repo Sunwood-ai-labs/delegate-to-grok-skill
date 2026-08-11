@@ -3,11 +3,11 @@ layout: home
 
 hero:
   name: delegate-to-grok
-  text: Defensive Grok Build delegation for Codex
-  tagline: A Windows skill that routes every headless Grok task through a guarded, read-only-first PowerShell wrapper.
+  text: Codex-to-Grok delegation for real work
+  tagline: Route research, review, comparison, and implementation support to Grok Build while Codex owns scope, validation, and final decisions.
   image:
     src: /icon.svg
-    alt: delegate-to-grok shield and route icon
+    alt: delegate-to-grok orchestration lanes icon
   actions:
     - theme: brand
       text: Get started
@@ -17,18 +17,18 @@ hero:
       link: https://github.com/Sunwood-ai-labs/delegate-to-grok-skill
 
 features:
-  - title: Prompt-safe transport
-    details: Uses a temporary prompt file instead of command-line prompt arguments, preserving quotes, punctuation, multiline text, and Japanese.
-  - title: Read-only by default
-    details: Starts with a read-only sandbox, default permissions, no Grok subagents, no memory, and an exact-directory boundary.
-  - title: Authentication without races
-    details: Verifies the Grok session before and after a task, isolates mutable auth state, and serializes wrapper invocations.
+  - title: Focused task delegation
+    details: Give Grok a bounded investigation, review, comparison, public X research, or implementation-support task from a named workspace.
+  - title: Findings back to Codex
+    details: Grok supplies evidence and implementation support; Codex remains responsible for scope, validation, and the final decision.
+  - title: Explicit execution contract
+    details: Permissions, workspace boundaries, authentication checks, and the single-flight run model are made explicit instead of being left to implicit CLI behavior.
 ---
 
-![A blue protective shield connecting two delegated agent nodes](/header-v1.png)
+![Central orchestrator splitting delegation task streams from Codex and merging Grok findings](/header-v2.png)
 
-## Safety first
+## Delegation model
 
-Codex remains responsible for scope, review, testing, and final conclusions. Grok is a consulted agent—not an autonomous owner of the workspace.
+Use Grok as a dedicated delegation lane: send a well-scoped task, bring back evidence or a proposed change, then let Codex review and integrate the result. This wrapper is single-flight by design; when you coordinate multiple tracks, do it at the Codex workflow level rather than claiming Grok-internal parallelism.
 
-Follow the [getting-started guide](/guide/getting-started) for installation, then read [safe delegation](/guide/safe-delegation) before authorizing a write task.
+Follow the [getting-started guide](/guide/getting-started), then read the [delegation contract](/guide/safe-delegation) before authorizing a write task.
