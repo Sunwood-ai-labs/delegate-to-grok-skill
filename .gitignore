@@ -1,0 +1,11 @@
+# Local installs and Grok authentication
+.grok/
+auth.json
+
+# PowerShell and editor state
+*.tmp
+*.log
+.vscode/
+
+# Release scratch files
+tmp/*.actual
