@@ -41,7 +41,7 @@
 - docs build QA: pass — `npm run docs:build --prefix docs` and `npm run docs:verify --prefix docs` completed successfully.
 - SVG QA: pass — `svg-header-layout-lint` reported no issues for `docs/public/icon.svg`.
 - dependency audit: reviewed — `npm audit` reports three known VitePress 1.6.4 development-server dependency advisories with no stable fix available from npm; production Pages deploys static build output and the local dev server remains loopback-only by default.
-- Pages deployment QA: pending — requires the pushed Pages workflow and live URL.
+- Pages deployment QA: pass — `Deploy documentation` run `31458965143` completed successfully after Pages was enabled as workflow-backed; English home, Japanese home, and getting-started page each returned HTTP 200 at `https://sunwood-ai-labs.github.io/delegate-to-grok-skill/`.
 - metadata QA: pass — GitHub description, homepage, and eight public topics were set and read back through `gh repo view`.
-- staged payload QA: pending
-- final Git status QA: pending
+- staged payload QA: pass — `check_commit_payload.ps1` inspected 25 files totaling 0.123 MiB; no warnings or blocked payloads.
+- final Git status QA: pass — public polish commit `16f2cb0` was pushed to `main`; this final evidence update is the only remaining local change before its own commit and push.
