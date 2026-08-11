@@ -32,7 +32,7 @@
 | producer 1 | アイ・カイロ / 委譲の言霊設計官 | bilingual positioning and IA | accepted; peer re-review pass |
 | producer 2 | ミラ・フェイズ / 多重路の景観錬成士 | visual identity and asset-use brief | accepted; peer re-review pass |
 | material design | カグラ・ノアール / 導線を裁く結界建築士 | user-facing Material Design audit | pass |
-| devil's advocate | ノクス・ヴァレン / 反証を裁く冥府の審判 | claim, brand, and rollout-risk audit | resolved locally; public-state verification pending |
+| devil's advocate | ノクス・ヴァレン / 反証を裁く冥府の審判 | claim, brand, and rollout-risk audit | resolved after public-state verification |
 | second pass | producer 1 ↔ producer 2 | mutual peer review of proposals | pass |
 
 ## Final signoff status
@@ -40,4 +40,4 @@
 - manager_acceptance: accepted — public wording, visual system, and execution-contract positioning were rebuilt with the producer recommendations.
 - second_pass_status: pass — both cross-review lanes passed after the wording was corrected to avoid claiming Grok-internal parallelism.
 - material_design_status: pass — hierarchy, navigation labels, alt text, and the new workflow imagery passed the final design audit.
-- disposition: blocked pending public validation — Devil's Advocate requires the staged rebrand to be committed, pushed, and validated by CI/Pages before final resolution.
+- disposition: resolved — commit `9a5e6a1` was pushed to `main`; Validate run `31460624639` and Deploy documentation run `31460624678` succeeded; English and Japanese Pages homes returned HTTP 200 with `header-v2.png` and the delegation-first hero text.
