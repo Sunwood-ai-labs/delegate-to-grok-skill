@@ -13,4 +13,4 @@
 - [x] Confirm English and Japanese README header/footer ordering.
 - [x] Run documentation build and structure verification.
 - [x] Run the Windows skill verification suite.
-- [ ] Inspect the staged commit payload, push, and confirm CI/Pages deployment.
+- [x] Inspect the staged commit payload, push, and confirm [Pages deployment](https://github.com/Sunwood-ai-labs/delegate-to-grok-skill/actions/runs/31461780703).
