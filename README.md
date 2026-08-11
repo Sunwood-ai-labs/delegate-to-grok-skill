@@ -1,13 +1,5 @@
 <p align="center">
-  <img src="docs/public/icon.svg" width="112" alt="delegate-to-grok orchestration lanes icon">
-</p>
-
-<h1 align="center">delegate-to-grok</h1>
-
-<p align="center">A Codex delegation lane for Grok Build research, review, comparison, and implementation support on Windows.</p>
-
-<p align="center">
-  <img src="docs/public/header-v2.png" alt="Central orchestrator splitting delegation task streams from Codex and merging Grok findings" width="100%">
+  <img src="docs/public/header-v3.png" alt="delegate-to-grok wordmark with luminous task streams routing through orchestration nodes" width="100%">
 </p>
 
 <p align="center">
@@ -84,3 +76,7 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing changes. The wrapper mu
 ## 📄 License
 
 MIT. See [LICENSE](LICENSE).
+
+<p align="center">
+  <img src="docs/public/icon.svg" width="56" alt="delegate-to-grok orchestration lanes icon">
+</p>

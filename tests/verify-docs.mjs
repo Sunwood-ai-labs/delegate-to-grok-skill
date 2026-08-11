@@ -9,6 +9,7 @@ const requiredFiles = [
   '.vitepress/theme/style.css',
   'public/icon.svg',
   'public/header-v2.png',
+  'public/header-v3.png',
   'index.md',
   'guide/getting-started.md',
   'guide/safe-delegation.md',
@@ -51,8 +52,21 @@ const brandSurfaces = [
 
 for (const relativePath of ['README.md', 'README.ja.md']) {
   const readme = readFileSync(resolve(repoRoot, relativePath), 'utf8')
-  for (const expected of ['docs/public/icon.svg', 'docs/public/header-v2.png', 'sunwood-ai-labs.github.io/delegate-to-grok-skill']) {
+  for (const expected of ['docs/public/icon.svg', 'docs/public/header-v3.png', 'sunwood-ai-labs.github.io/delegate-to-grok-skill']) {
     if (!readme.includes(expected)) throw new Error(`${relativePath} is missing ${expected}`)
+  }
+
+  if (!readme.trimStart().startsWith('<p align="center">\n  <img src="docs/public/header-v3.png"')) {
+    throw new Error(`${relativePath} must begin with the standalone v3 header image.`)
+  }
+
+  const headerEnd = readme.indexOf('</p>')
+  if (readme.slice(0, headerEnd).includes('docs/public/icon.svg')) {
+    throw new Error(`${relativePath} must not place the icon before the header.`)
+  }
+
+  if (readme.lastIndexOf('docs/public/icon.svg') < readme.lastIndexOf('## 📄')) {
+    throw new Error(`${relativePath} must place the icon in its footer.`)
   }
 }
 
@@ -64,8 +78,6 @@ for (const relativePath of brandSurfaces) {
 }
 
 for (const [relativePath, required] of [
-  ['README.md', 'Grok Build research, review, comparison, and implementation support'],
-  ['README.ja.md', '調査・レビュー・比較・実装補助'],
   ['docs/index.md', 'Codex-to-Grok delegation for real work'],
   ['docs/ja/index.md', 'Codex から Grok Build へ仕事を委譲']
 ]) {

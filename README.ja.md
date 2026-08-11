@@ -1,13 +1,5 @@
 <p align="center">
-  <img src="docs/public/icon.svg" width="112" alt="delegate-to-grok の委譲レーンを表すアイコン">
-</p>
-
-<h1 align="center">delegate-to-grok</h1>
-
-<p align="center">Windows 上で、Codex から Grok Build へ調査・レビュー・比較・実装補助を委譲するスキルです。</p>
-
-<p align="center">
-  <img src="docs/public/header-v2.png" alt="Codexの中央制御から委譲タスクを分配し、Grokの結果を集約するワークフロー図" width="100%">
+  <img src="docs/public/header-v3.png" alt="delegate-to-grok のワードマークと委譲タスクをオーケストレーションノードで流す光のストリーム" width="100%">
 </p>
 
 <p align="center">
@@ -84,3 +76,7 @@ npm --prefix .\docs run docs:build
 ## 📄 ライセンス
 
 MIT。詳細は [LICENSE](LICENSE) を参照してください。
+
+<p align="center">
+  <img src="docs/public/icon.svg" width="56" alt="delegate-to-grok の委譲レーンを表すアイコン">
+</p>
