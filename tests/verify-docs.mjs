@@ -8,6 +8,7 @@ const requiredFiles = [
   '.vitepress/theme/index.ts',
   '.vitepress/theme/style.css',
   'public/icon.svg',
+  'public/header-v1.png',
   'index.md',
   'guide/getting-started.md',
   'guide/safe-delegation.md',
@@ -42,7 +43,7 @@ if (!icon.includes('<svg') || !icon.includes('Delegate to Grok safety route')) {
 
 for (const relativePath of ['README.md', 'README.ja.md']) {
   const readme = readFileSync(resolve(repoRoot, relativePath), 'utf8')
-  for (const expected of ['docs/public/icon.svg', 'sunwood-ai-labs.github.io/delegate-to-grok-skill']) {
+  for (const expected of ['docs/public/icon.svg', 'docs/public/header-v1.png', 'sunwood-ai-labs.github.io/delegate-to-grok-skill']) {
     if (!readme.includes(expected)) throw new Error(`${relativePath} is missing ${expected}`)
   }
 }

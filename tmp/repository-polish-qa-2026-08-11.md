@@ -40,6 +40,7 @@
 - structural QA: pass — README heading parity, renamed-slug search, docs paths, icon references, and workflow targets were checked.
 - docs build QA: pass — `npm run docs:build --prefix docs` and `npm run docs:verify --prefix docs` completed successfully.
 - SVG QA: pass — `svg-header-layout-lint` reported no issues for `docs/public/icon.svg`.
+- Header image QA: pass — built-in `image_gen` produced the text-free `docs/public/header-v1.png`; visual inspection confirmed the requested left-side copy space, shield-and-route motif, and absence of third-party branding.
 - dependency audit: reviewed — `npm audit` reports three known VitePress 1.6.4 development-server dependency advisories with no stable fix available from npm; production Pages deploys static build output and the local dev server remains loopback-only by default.
 - Pages deployment QA: pass — `Deploy documentation` run `31458965143` completed successfully after Pages was enabled as workflow-backed; English home, Japanese home, and getting-started page each returned HTTP 200 at `https://sunwood-ai-labs.github.io/delegate-to-grok-skill/`.
 - metadata QA: pass — GitHub description, homepage, and eight public topics were set and read back through `gh repo view`.

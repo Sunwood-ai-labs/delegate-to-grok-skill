@@ -25,6 +25,8 @@ features:
     details: Verifies the Grok session before and after a task, isolates mutable auth state, and serializes wrapper invocations.
 ---
 
+![A blue protective shield connecting two delegated agent nodes](/header-v1.png)
+
 ## Safety first
 
 Codex remains responsible for scope, review, testing, and final conclusions. Grok is a consulted agent—not an autonomous owner of the workspace.

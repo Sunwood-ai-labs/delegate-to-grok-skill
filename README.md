@@ -7,6 +7,10 @@
 <p align="center">A defensive Codex skill for delegating research and explicitly authorized implementation work to Grok Build on Windows.</p>
 
 <p align="center">
+  <img src="docs/public/header-v1.png" alt="A blue protective shield connecting two delegated agent nodes" width="100%">
+</p>
+
+<p align="center">
   <a href="https://github.com/Sunwood-ai-labs/delegate-to-grok-skill/actions/workflows/ci.yml"><img src="https://github.com/Sunwood-ai-labs/delegate-to-grok-skill/actions/workflows/ci.yml/badge.svg" alt="Validate workflow"></a>
   <a href="https://github.com/Sunwood-ai-labs/delegate-to-grok-skill/releases/tag/v0.1.0"><img src="https://img.shields.io/github/v/release/Sunwood-ai-labs/delegate-to-grok-skill?display_name=tag" alt="Latest release"></a>
   <a href="LICENSE"><img src="https://img.shields.io/github/license/Sunwood-ai-labs/delegate-to-grok-skill" alt="MIT license"></a>
